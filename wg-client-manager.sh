@@ -113,6 +113,8 @@ case "$subcommand" in
         export public_key=$(echo ${private_key} | wg pubkey | tee "${base_dir}/${client}/${client}.pub")
         export preshared_key=$(wg genpsk | tee "${base_dir}/${client}/${client}.psk")
 
+        export server_public_key=$(sudo wg show ${wg_interface} public-key)
+
         echo "Assigning ip addresses..."
         export ipv4=$(generate_ipv4_addr)
         export ipv6=$(generate_ipv6_addr)
